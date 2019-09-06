@@ -1,1 +1,0 @@
-This project is an application for creating websites.
