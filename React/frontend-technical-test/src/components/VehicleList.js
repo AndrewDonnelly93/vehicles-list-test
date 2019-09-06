@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { isNilOrEmpty } from 'ramda-extension';
+import VehicleCard from './VehicleCard';
 import { fetchVehiclesStart } from '../redux/vehicles/vehiclesActions';
 
 class VehicleList extends Component {
@@ -18,7 +19,12 @@ class VehicleList extends Component {
     if (!isNilOrEmpty(vehicles)) {
       console.log(vehicles);
       return (
-        <h1>Hello World</h1>
+        <section className="vehicles">
+          <h2>Vehicles</h2>
+          {
+            (vehicles || []).map(({vehicle}) => <VehicleCard key={vehicle.id} vehicle={vehicle}/>)
+          };
+        </section>
       )
     }
 
