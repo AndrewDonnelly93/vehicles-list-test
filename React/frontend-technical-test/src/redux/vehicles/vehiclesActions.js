@@ -14,9 +14,9 @@ export const fetchVehiclesFailure = (error) => ({
   payload: error,
 });
 
-export const fetchVehicleStart = (url) => ({
+export const fetchVehicleStart = (vehicle) => ({
     type: VehiclesActionTypes.FETCH_VEHICLE_START,
-    payload: url
+    payload: vehicle.url
 });
 
 export const fetchVehicleSuccess = (vehicle) => ({

@@ -20,16 +20,14 @@ export function* fetchVehicles() {
       .then(response => response.json());
     const vehicles = response.vehicles;
     yield put(fetchVehiclesSuccess(vehicles));
-    yield all(vehicles.map(({url}) => put(fetchVehicleStart(url))));
+    yield all(vehicles.map((vehicle) => put(fetchVehicleStart(vehicle))));
   } catch (error) {
     yield put(fetchVehiclesFailure(error));
   }
 }
 
 export function* fetchVehicle(url) {
-  debugger;
   try {
-    debugger;
     const response = yield fetch(`${apiUrlRoot}${url}`)
       .then(response => response.json());
     yield put(fetchVehicleSuccess(response));

@@ -9,8 +9,8 @@ import rootSaga from './rootSaga';
 const sagaMiddleware = createSagaMiddleware();
 
 const middlewares = [sagaMiddleware];
-
-const isDevelopment = process.env.NODE_ENV === EnvironmentTypes.DEVELOPMENT;
+const isDevelopment = true;
+  //process.env.NODE_ENV === EnvironmentTypes.DEVELOPMENT;
 
 if (isDevelopment) {
   middlewares.push(logger);
