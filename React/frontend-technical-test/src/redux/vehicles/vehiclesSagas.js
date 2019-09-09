@@ -1,5 +1,5 @@
 import {
-  takeLatest, put, all, call, take
+  takeLatest, put, all, call, takeEvery
 } from 'redux-saga/effects';
 
 import VehiclesActionTypes from './vehiclesActionTypes';
@@ -26,12 +26,15 @@ export function* fetchVehicles() {
   }
 }
 
-export function* fetchVehicle(url) {
+export function* fetchVehicle(action) {
   try {
-    const response = yield fetch(`${apiUrlRoot}${url}`)
+    const response = yield fetch(`${apiUrlRoot}${action.payload}`)
       .then(response => response.json());
     yield put(fetchVehicleSuccess(response));
   } catch (error) {
+    const test = error;
+    console.log('err ', error);
+    debugger;
     yield put(fetchVehicleFailure(error));
   }
 }
@@ -41,8 +44,7 @@ export function* onFetchVehiclesStart() {
 }
 
 export function* onFetchVehicleStart() {
-  debugger;
-  yield take(VehiclesActionTypes.FETCH_VEHICLE_START, fetchVehicle);
+  yield takeEvery(VehiclesActionTypes.FETCH_VEHICLE_START, fetchVehicle);
 }
 
 export function* vehiclesSagas() {

@@ -6,7 +6,7 @@ import { fetchVehiclesStart } from '../redux/vehicles/vehiclesActions';
 
 class VehicleList extends Component {
   componentDidMount() {
-    const { vehicles: {vehicles}, fetchVehiclesStart } = this.props;
+    const { vehicles, fetchVehiclesStart } = this.props;
 
     if (isNilOrEmpty(vehicles)) {
       fetchVehiclesStart();
@@ -14,7 +14,7 @@ class VehicleList extends Component {
   }
 
   render() {
-    const { vehicles: {vehicles, error} } = this.props;
+    const { vehicles, error } = this.props;
 
     if (!isNilOrEmpty(vehicles)) {
       console.log(vehicles);
@@ -32,8 +32,9 @@ class VehicleList extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  vehicles: state.vehicles
+const mapStateToProps = ({vehicles}) => ({
+  vehicles: vehicles.vehicles,
+  error: vehicles.error
 });
 
 const mapDispatchToProps = (dispatch) => ({

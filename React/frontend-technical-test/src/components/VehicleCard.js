@@ -21,7 +21,7 @@ const VehicleCard = (vehicle = {
       <div className="vehicleInfo">
         <h2>{name}</h2>
         <p className="price">From £{price}</p>
-        <p className="description">From £{description}</p>
+        <p className="description">{description}</p>
       </div>
     </div>
   )

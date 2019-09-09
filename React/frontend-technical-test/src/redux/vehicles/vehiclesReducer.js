@@ -19,9 +19,10 @@ const vehiclesReducer = (state = INITIAL_STATE, action) => {
       const vehicle = state.vehicles.find(({id: vehicleId}) => vehicleId  === id);
       vehicle.price = price;
       vehicle.description = description;
+      const vehicles = state.vehicles.map((vehicleItem) => vehicleItem.id === vehicle.id ? vehicle : vehicleItem);
       return {
         ...state,
-        vehicles: {...state.vehicles, vehicle},
+        vehicles,
         error: null,
       };
     case VehiclesActionTypes.FETCH_VEHICLES_FAILURE:
