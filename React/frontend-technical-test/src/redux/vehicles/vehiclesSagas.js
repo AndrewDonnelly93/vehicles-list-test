@@ -32,9 +32,6 @@ export function* fetchVehicle(action) {
       .then(response => response.json());
     yield put(fetchVehicleSuccess(response));
   } catch (error) {
-    const test = error;
-    console.log('err ', error);
-    debugger;
     yield put(fetchVehicleFailure(error));
   }
 }
