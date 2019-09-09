@@ -14,6 +14,7 @@ const vehiclesReducer = (state = INITIAL_STATE, action) => {
         error: null,
       };
     case VehiclesActionTypes.FETCH_VEHICLE_SUCCESS:
+      debugger;
       const {id, price, description} = action.payload;
       const vehicle = state.vehicles.find(({id: vehicleId}) => vehicleId  === id);
       vehicle.price = price;

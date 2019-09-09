@@ -22,7 +22,7 @@ class VehicleList extends Component {
         <section className="vehicles">
           <h2>Vehicles</h2>
           {
-            (vehicles || []).map(({vehicle}) => <VehicleCard key={vehicle.id} vehicle={vehicle}/>)
+            (vehicles || []).map((vehicle) => <VehicleCard key={vehicle.id} vehicle={vehicle}/>)
           };
         </section>
       )

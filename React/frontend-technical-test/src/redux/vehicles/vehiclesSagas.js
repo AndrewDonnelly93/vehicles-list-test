@@ -1,5 +1,5 @@
 import {
-  takeLatest, put, all, call
+  takeLatest, put, all, call, take
 } from 'redux-saga/effects';
 
 import VehiclesActionTypes from './vehiclesActionTypes';
@@ -12,22 +12,25 @@ import {
   fetchVehicleStart
 } from './vehiclesActions';
 
+const apiUrlRoot = 'http://localhost:9988';
+
 export function* fetchVehicles() {
   try {
-    const response = yield fetch('http://localhost:9988/api/vehicle')
+    const response = yield fetch(`${apiUrlRoot}/api/vehicle`)
       .then(response => response.json());
     const vehicles = response.vehicles;
     yield put(fetchVehiclesSuccess(vehicles));
-    yield vehicles.forEach(({url}) => put(fetchVehicleStart(url)));
+    yield all(vehicles.map(({url}) => put(fetchVehicleStart(url))));
   } catch (error) {
     yield put(fetchVehiclesFailure(error));
   }
 }
 
 export function* fetchVehicle(url) {
+  debugger;
   try {
     debugger;
-    const response = yield fetch(`http://localhost:9988/api/vehicle/${url}`)
+    const response = yield fetch(`${apiUrlRoot}${url}`)
       .then(response => response.json());
     yield put(fetchVehicleSuccess(response));
   } catch (error) {
@@ -40,7 +43,8 @@ export function* onFetchVehiclesStart() {
 }
 
 export function* onFetchVehicleStart() {
-  yield takeLatest(VehiclesActionTypes.FETCH_VEHICLE_START, fetchVehicle);
+  debugger;
+  yield take(VehiclesActionTypes.FETCH_VEHICLE_START, fetchVehicle);
 }
 
 export function* vehiclesSagas() {
